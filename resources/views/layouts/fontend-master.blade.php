@@ -29,7 +29,7 @@
 
 		
 		<!-- Icons/Glyphs -->
-		<link rel="stylesheet" href="assets/css/font-awesome.css">
+		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">
 
         <!-- Fonts --> 
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -54,13 +54,7 @@
 					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 					<li>
                         @auth
-                        {{-- <a href="{{route('user.dashboard')}}"><i class="icon fa fa-lock"></i>Porfile</a> --}}
-                        <a href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Sign Out</a>
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                  @csrf
-                              </form>
+                        <a href="{{route('user.dashboard')}}"><i class="icon fa fa-lock"></i>Porfile</a>
                         @else
                         <a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login/Register</a>
                         @endauth
@@ -100,7 +94,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
 					<!-- ============================================================= LOGO ============================================================= -->
 <div class="logo">
-	<a href="home.html">
+	<a href="{{url('/')}}">
 		
 		<img src="{{asset('fontend')}}/assets/images/logo.png" alt="">
 
