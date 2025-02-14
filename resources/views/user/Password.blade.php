@@ -34,31 +34,31 @@
             <div class="col-sm-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Hi..! {{ Auth::user()->name }} Update your profile</h5>
-                  <form action="{{route('update.profile')}}" method="POST">
+                  <h5 class="card-title">Hi..! {{ Auth::user()->name }} Change profile password</h5>
+                  <form action="{{route('password.update')}}" method="POST">
                     @csrf
                     <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Name" value="{{Auth::user()->name}}" name="name">
-                      @error('name')
+                      <label for="password">Old Password</label>
+                      <input type="password" class="form-control" value="" name="password">
+                      @error('password')
                           <span class="text-danger">{{$message}}</span>
                       @enderror
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" placeholder="Enter Email" value="{{Auth::user()->email}}" name="email">
-                        @error('email')
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" value="" name="newPassword">
+                        @error('newPassword')
                           <span class="text-danger">{{$message}}</span>
                       @enderror
                       </div>
                       <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="text" class="form-control" placeholder="Enter Phone" value="{{Auth::user()->phone}}" name="phone">
-                        @error('phone')
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" value="" name="confirmPassword">
+                        @error('confirmPassword')
                           <span class="text-danger">{{$message}}</span>
                       @enderror
                       </div>
-                    <button type="submit" class="btn btn-primary">Profile Update</button>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
                   </form>
                 </div>
               </div>

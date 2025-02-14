@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -82,6 +83,37 @@ class UserController extends Controller
     
             return redirect()->back()->with('success', 'Image uploaded successfully!');
         }
-        
     }
+
+    public function passwordForm(){
+        return view('user.password');
+    }
+
+    public function passwordUpdate(Request $request){
+        $request->validate([
+            'password' => 'required',
+            'newPassword' => ['required', 'string', 'min:8'],
+            'confirmPassword' => ['required', 'string', 'min:8'],
+        ]);
+
+        $db_pass = Auth::user()->password;
+        $pass = $request->password;
+        $new_pass = $request->newPassword;
+        $confirm_pass = $request->confirmPassword;
+
+        if(Hash::check($pass,$db_pass)){
+            if($new_pass === $confirm_pass){
+                User::findOrFail(Auth::id())->update([
+                    'password' => Hash::make($new_pass),
+                ]);
+                Auth::logout();
+                return redirect()->route('login')->with('success','Your Password Change successfully and Now! Login With New Password');
+            }else{
+                return redirect()->back()->with('error','New Password and Confirm Password Are Not Same!');
+            }
+        }else{
+            return redirect()->back()->with('error','Old Password Not Match!');
+        }
+    }
+
 }

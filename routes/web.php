@@ -33,4 +33,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' =
     Route::post('updateProfile',[UserController::class,'updateProfile'])->name('update.profile');
     Route::get('imageForm', [UserController::class, 'imageForm'])->name('image.form');
     Route::post('imageUpload', [UserController::class, 'imageUpload'])->name('image.upload');
+    Route::get('passwordForm', [UserController::class, 'passwordForm'])->name('password.form');
+    Route::post('passwordUpdate', [UserController::class, 'passwordUpdate'])->name('password.update');
 });

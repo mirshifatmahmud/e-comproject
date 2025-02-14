@@ -6,7 +6,7 @@
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="home.html">Home</a></li>
-				<li class='active'>Login</li>
+				<li class='active'>Profile</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -22,6 +22,7 @@
                     <ul class="list-group list-group-flush">
                       <a href="{{route('user.dashboard')}}" class="list-group-item">Home</a>
                       <a href="{{route('image.form')}}" class="list-group-item">Upload Avatar</a>
+                      <a href="{{route('password.form')}}" class="list-group-item">Password Change</a>
                       <a href="{{ route('logout') }}" class="btn btn-danger btn-sm btn-block" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Log Out</a>
                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
