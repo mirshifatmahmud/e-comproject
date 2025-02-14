@@ -26,7 +26,8 @@
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
 
 		
-
+        <!-- toastr JS css file -->
+        <link rel="stylesheet" href="{{ asset('backend/lib/toastr/toastr.css') }}">
 		
 		<!-- Icons/Glyphs -->
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">
@@ -625,6 +626,39 @@
     <script src="{{ asset('fontend') }}/assets/js/wow.min.js"></script>
 	<script src="{{ asset('fontend') }}/assets/js/scripts.js"></script>
 
+    <script src="{{ asset('backend/lib/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>    
 
 </body>
 
