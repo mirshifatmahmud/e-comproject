@@ -55,7 +55,7 @@
 					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 					<li>
                         @auth
-                        <a href="{{route('user.dashboard')}}"><i class="icon fa fa-lock"></i>Porfile</a>
+                        <a href="{{route('user.dashboard')}}"><i class="icon fa fa-lock"></i>Profile ({{ Auth::user()->name }})</a>
                         @else
                         <a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login/Register</a>
                         @endauth

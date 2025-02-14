@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -31,5 +32,56 @@ class UserController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'User Profile Updated successfully!');
+    }
+
+    public function imageForm(){
+        return view('user.avatar');
+    }
+
+    // Handle Image Upload
+    public function imageUpload(Request $request)
+    {
+
+        if(Auth::user()->image == null){
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+    
+            // Store image in "public/uploads"
+            $imagePath = $request->file('image')->store('uploads', 'public');
+    
+            echo $imagePath;
+    
+            // // Save to database
+            User::findOrFail(Auth::id())->update([
+                'image' => $imagePath,
+                'updated_at' => Carbon::now(),
+            ]);
+    
+            return redirect()->back()->with('success', 'Image uploaded successfully!');
+        }else{
+            $image = User::findOrFail(Auth::id());
+
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            // Delete from storage
+            Storage::disk('public')->delete($image->image);
+    
+            // Store image in "public/uploads"
+            $imagePath = $request->file('image')->store('uploads', 'public');
+    
+            echo $imagePath;
+    
+            // // Save to database
+            User::findOrFail(Auth::id())->update([
+                'image' => $imagePath,
+                'updated_at' => Carbon::now(),
+            ]);
+    
+            return redirect()->back()->with('success', 'Image uploaded successfully!');
+        }
+        
     }
 }
