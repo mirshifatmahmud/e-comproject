@@ -64,8 +64,8 @@
                         @csrf
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
-                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail2" name="email" value="{{ old('email') }}">
-                                @error('email')
+                            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail2" name="email1" value="{{ old('email') }}">
+                                @error('email1')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -91,8 +91,8 @@
                         </div>
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
-                            <input type="password" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="password">
-                                @error('password')
+                            <input type="password" class="form-control unicase-form-control text-input" id="exampleInputEmail1" name="password1">
+                                @error('password1')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
