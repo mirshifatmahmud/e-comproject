@@ -36,6 +36,9 @@
     <link href="{{ asset('backend') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
 
+    <!-- toastr JS css file -->
+    <link rel="stylesheet" href="{{ asset('backend/lib/toastr/toastr.css') }}">
+
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   </head>
@@ -56,12 +59,13 @@
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name">Jane<span class="hidden-md-down"> Doe</span></span>
-              <img src="{{ asset('backend') }}/img/img3.jpg" class="wd-32 rounded-circle" alt="">
+              <span class="logged-name"><span class="hidden-md-down">{{ Auth::user()->name }}</span></span>
+              <img @if (Auth::user()->image == null) src="{{ asset('fontend/avatar.png') }}"
+              @else src="{{ asset('storage/' . Auth::user()->image) }}" @endif alt="User Avatar" class="wd-32 rounded-circle" alt="">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
+                <li><a href="{{ route('admin.profile.form') }}"><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
                 <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
                 <li>
                   <a href="{{ route('logout') }}"
@@ -246,7 +250,7 @@
     <!-- ########## END: RIGHT PANEL ########## --->
 
     <!-- ########## START: MAIN PANEL ########## -->
-    @yield('admin-content')
+    @yield('content')
     <!-- ########## END: MAIN PANEL ########## -->
 
     <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
@@ -266,5 +270,40 @@
     <script src="{{ asset('backend') }}/js/starlight.js"></script>
     <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
     <script src="{{ asset('backend') }}/js/dashboard.js"></script>
+
+    <script src="{{ asset('backend/lib/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+
   </body>
 </html>
