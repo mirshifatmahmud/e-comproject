@@ -1,5 +1,7 @@
 @extends('layouts.admin-master')
-
+@section('dashboard-active')
+    active
+@endsection
 @section('content')
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
@@ -101,6 +103,6 @@
       </div><!-- row -->
 
     </div><!-- sl-pagebody -->
-    
+
   </div><!-- sl-mainpanel -->
 @endsection

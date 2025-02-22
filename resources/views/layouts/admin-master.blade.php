@@ -39,6 +39,10 @@
     <!-- toastr JS css file -->
     <link rel="stylesheet" href="{{ asset('backend/lib/toastr/toastr.css') }}">
 
+    <!-- data table css file -->
+    <link href="{{ asset('backend') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link href="{{ asset('backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
+
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   </head>
@@ -258,6 +262,34 @@
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('backend') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+
+    <script src="{{ asset('backend') }}/lib/datatables/jquery.dataTables.js"></script>
+    <script src="{{ asset('backend') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    <script>
+        $(function(){
+          'use strict';
+
+          $('#datatable1').DataTable({
+            responsive: true,
+            language: {
+              searchPlaceholder: 'Search...',
+              sSearch: '',
+              lengthMenu: '_MENU_ items/page',
+            }
+          });
+
+        // $('#datatable2').DataTable({
+        //     bLengthChange: false,
+        //     searching: false,
+        //     responsive: true
+        //   });
+
+          // Select2
+        //   $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+        });
+      </script>
     <script src="{{ asset('backend') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="{{ asset('backend') }}/lib/d3/d3.js"></script>
     <script src="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.js"></script>
@@ -287,22 +319,50 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        
+
         @if (session('success'))
             toastr.success("{{ session('success') }}");
         @endif
-    
+
         @if (session('error'))
             toastr.error("{{ session('error') }}");
         @endif
-    
+
         @if (session('warning'))
             toastr.warning("{{ session('warning') }}");
         @endif
-    
+
         @if (session('info'))
             toastr.info("{{ session('info') }}");
         @endif
+    </script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SweetAlert2 -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <script src="{{ asset('backend/lib/sweetalert/sweetalert.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#delete-form').on('submit', function(e) {
+                e.preventDefault(); // ফর্ম সাবমিশন বন্ধ করুন
+
+                Swal.fire({
+                    title: "Are you sure To Delete?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // যদি ব্যবহারকারী কনফার্ম করে, তাহলে ফর্ম সাবমিট করুন
+                        e.currentTarget.submit();
+                    }
+                });
+            });
+        });
     </script>
 
   </body>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// ==================================admin route===========================================================
 Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace' => 'Admin'],function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     //admin profile
@@ -33,9 +35,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace'
     Route::post('imageUpload', [AdminController::class, 'imageUpload'])->name('admin.image.upload');
     Route::get('passwordForm', [AdminController::class, 'passwordForm'])->name('admin.password.form');
     Route::post('passwordUpdate', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
+    //brand crud
+    Route::get('brands',[BrandController::class,'index'])->name('brand');
+    Route::post('brandStore',[BrandController::class,'brandStore'])->name('brand.store');
+    Route::get('brandEdit/{id}',[BrandController::class,'brandEdit'])->name('brand.edit');
+    Route::put('brandUpdate',[BrandController::class,'brandUpdate'])->name('brand.update');
+    Route::delete('brandDelete/{id}',[BrandController::class,'brandDelete'])->name('brand.delete');
 
 });
 
+// ================================================user route============================================
 Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' => 'User'],function(){
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
     //user profile

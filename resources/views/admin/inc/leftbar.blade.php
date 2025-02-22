@@ -18,13 +18,20 @@
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
 
-          <a href="{{route('admin.dashboard')}}" class="sl-menu-link active">
+          <a href="{{route('admin.dashboard')}}" class="sl-menu-link @yield('dashboard-active')">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
               <span class="menu-item-label">Dashboard</span>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
-        
+
+          <a href="{{route('brand')}}" class="sl-menu-link @yield('brand-active')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Brands</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -39,7 +46,7 @@
           <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
           <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
         </ul>
-        
+
       </div><!-- sl-sideleft-menu -->
 
       <br>
