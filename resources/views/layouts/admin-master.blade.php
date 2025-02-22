@@ -256,8 +256,8 @@
     <!-- ########## START: MAIN PANEL ########## -->
     @yield('content')
     <!-- ########## END: MAIN PANEL ########## -->
-
-    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script> --}}
     <script src="{{ asset('backend') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
@@ -338,7 +338,7 @@
     </script>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <!-- SweetAlert2 -->
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script src="{{ asset('backend/lib/sweetalert/sweetalert.min.js') }}"></script>
