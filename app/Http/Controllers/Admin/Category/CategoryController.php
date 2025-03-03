@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -63,4 +63,5 @@ class CategoryController extends Controller
         $brand->delete();
         return redirect()->route('category')->with('success', 'Category Deleted Successfully!');
     }
+
 }

@@ -2,7 +2,7 @@
 @section('categories-active')
     active show-sub
 @endsection
-@section('add-category-active')
+@section('all-category-active')
     active
 @endsection
 

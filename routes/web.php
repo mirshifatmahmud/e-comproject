@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\Brand\BrandController;
+use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,10 +49,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace'
     //category crud
     Route::get('categories',[CategoryController::class,'index'])->name('category');
     Route::post('categoryStore',[CategoryController::class,'categoryStore'])->name('category.store');
-
     Route::get('categoryEdit/{id}',[CategoryController::class,'categoryEdit'])->name('category.edit');
     Route::put('categoryUpdate',[CategoryController::class,'categoryUpdate'])->name('category.update');
     Route::delete('categoryDelete/{id}',[CategoryController::class,'categoryDelete'])->name('category.delete');
+
+    //subcategory crud
+    Route::get('subCategories',[SubCategoryController::class,'index'])->name('subCategory');
+    Route::post('subCategoryStore',[SubCategoryController::class,'subCategoryStore'])->name('subCategory.store');
+    Route::get('subCategoryEdit/{id}',[SubCategoryController::class,'subCategoryEdit'])->name('subCategory.edit');
+    Route::put('subCategoryUpdate',[SubCategoryController::class,'subCategoryUpdate'])->name('subCategory.update');
+    Route::delete('subCategoryDelete/{id}',[SubCategoryController::class,'subCategoryDelete'])->name('subCategory.delete');
 
 
 });

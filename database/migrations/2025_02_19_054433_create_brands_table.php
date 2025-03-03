@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('brands_name_bn');
             $table->string('brands_name_en');
-            $table->string('brands_slug_bn');
+            $table->string('brands_name_bn');
             $table->string('brands_slug_en');
+            $table->string('brands_slug_bn');
             $table->string('brands_image');
             $table->timestamps();
         });

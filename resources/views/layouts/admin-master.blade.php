@@ -271,16 +271,21 @@
     <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
     <script>
         $(function(){
-          'use strict';
+            'use strict';
 
-          $('#datatable1').DataTable({
+            // Select2 by showing the search
+            $('.select2-show-search').select2({
+            minimumResultsForSearch: ''
+            });
+
+            $('#datatable1').DataTable({
             responsive: true,
             language: {
-              searchPlaceholder: 'Search...',
-              sSearch: '',
-              lengthMenu: '_MENU_ items/page',
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
             }
-          });
+            });
 
         // $('#datatable2').DataTable({
         //     bLengthChange: false,
@@ -290,7 +295,6 @@
 
           // Select2
         //   $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-
         });
     </script>
 
