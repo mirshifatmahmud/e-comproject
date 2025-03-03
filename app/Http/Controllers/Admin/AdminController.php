@@ -51,18 +51,18 @@ class AdminController extends Controller
             $request->validate([
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
-    
+
             // Store image in "public/uploads"
             $imagePath = $request->file('image')->store('uploads', 'public');
-    
+
             echo $imagePath;
-    
+
             // // Save to database
             User::findOrFail(Auth::id())->update([
                 'image' => $imagePath,
                 'updated_at' => Carbon::now(),
             ]);
-    
+
             return redirect()->back()->with('success', 'Image uploaded successfully!');
         }else{
             $image = User::findOrFail(Auth::id());
@@ -73,18 +73,16 @@ class AdminController extends Controller
 
             // Delete from storage
             Storage::disk('public')->delete($image->image);
-    
+
             // Store image in "public/uploads"
             $imagePath = $request->file('image')->store('uploads', 'public');
-    
-            echo $imagePath;
-    
+
             // // Save to database
             User::findOrFail(Auth::id())->update([
                 'image' => $imagePath,
                 'updated_at' => Carbon::now(),
             ]);
-    
+
             return redirect()->back()->with('success', 'Image uploaded successfully!');
         }
     }

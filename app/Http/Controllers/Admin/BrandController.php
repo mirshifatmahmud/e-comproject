@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $brands = Brand::latest()->get();
-        return view('admin.brand.index',compact('brands'));
+        return view('admin.brand.index', compact('brands'));
     }
 
-    public function brandStore(Request $request){
+    public function brandStore(Request $request)
+    {
         $request->validate([
             'brand_name_en' => 'required',
             'brand_name_bn' => 'required',
@@ -28,20 +30,22 @@ class BrandController extends Controller
             'brands_name_en' => $request->brand_name_en,
             'brands_name_bn' => $request->brand_name_bn,
             'brands_image' => $imagePath,
-            'brands_slug_en' => strtolower(str_replace(' ','-',$request->brand_name_en)),
-            'brands_slug_bn' => str_replace(' ','-',$request->brand_name_bn),
+            'brands_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
+            'brands_slug_bn' => str_replace(' ', '-', $request->brand_name_bn),
         ]);
 
         return redirect()->back()->with('success', 'Brand Added successfully!');
     }
 
-    public function brandEdit($id){
+    public function brandEdit($id)
+    {
         $brand = Brand::findOrFail($id);
-        return view('admin.brand.edit',compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
-    public function brandUpdate(Request $request){
-        if($request->brand_image){
+    public function brandUpdate(Request $request)
+    {
+        if ($request->brand_image) {
             $image = Brand::findOrFail($request->id);
 
             $request->validate([
@@ -61,12 +65,12 @@ class BrandController extends Controller
                 'brands_name_en' => $request->brand_name_en,
                 'brands_name_bn' => $request->brand_name_bn,
                 'brands_image' => $imagePath,
-                'brands_slug_en' => strtolower(str_replace(' ','-',$request->brand_name_en)),
-                'brands_slug_bn' => str_replace(' ','-',$request->brand_name_bn),
+                'brands_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
+                'brands_slug_bn' => str_replace(' ', '-', $request->brand_name_bn),
             ]);
 
-            return redirect()->route('brand')->with('success', 'Brand uploaded successfully!');
-        }else{
+            return redirect()->route('brand')->with('success', 'Brand updated successfully!');
+        } else {
             $request->validate([
                 'brand_name_en' => 'required',
                 'brand_name_bn' => 'required',
@@ -75,16 +79,19 @@ class BrandController extends Controller
             Brand::findOrFail($request->id)->update([
                 'brands_name_en' => $request->brand_name_en,
                 'brands_name_bn' => $request->brand_name_bn,
-                'brands_slug_en' => strtolower(str_replace(' ','-',$request->brand_name_en)),
-                'brands_slug_bn' => str_replace(' ','-',$request->brand_name_bn),
+                'brands_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
+                'brands_slug_bn' => str_replace(' ', '-', $request->brand_name_bn),
             ]);
 
-            return redirect()->route('brand')->with('success', 'Brand old uploaded successfully!');
+            return redirect()->route('brand')->with('success', 'Brand updated successfully!');
         }
     }
 
-    public function brandDelete($id){
+    public function brandDelete($id)
+    {
         $brand = Brand::findOrFail($id);
+        // Delete from storage
+        Storage::disk('public')->delete($brand->brands_image);
         $brand->delete();
         return redirect()->route('brand')->with('success', 'Brand Deleted Successfully!');
     }

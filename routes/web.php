@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Auth::routes();
 // ==================================admin route===========================================================
 Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace' => 'Admin'],function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+
     //admin profile
     Route::get('profileForm',[AdminController::class,'profileForm'])->name('admin.profile.form');
     Route::post('profileUpdate',[AdminController::class,'profileUpdate'])->name('admin.profile.update');
@@ -35,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace'
     Route::post('imageUpload', [AdminController::class, 'imageUpload'])->name('admin.image.upload');
     Route::get('passwordForm', [AdminController::class, 'passwordForm'])->name('admin.password.form');
     Route::post('passwordUpdate', [AdminController::class, 'passwordUpdate'])->name('admin.password.update');
+
     //brand crud
     Route::get('brands',[BrandController::class,'index'])->name('brand');
     Route::post('brandStore',[BrandController::class,'brandStore'])->name('brand.store');
@@ -42,11 +45,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace'
     Route::put('brandUpdate',[BrandController::class,'brandUpdate'])->name('brand.update');
     Route::delete('brandDelete/{id}',[BrandController::class,'brandDelete'])->name('brand.delete');
 
+    //category crud
+    Route::get('categories',[CategoryController::class,'index'])->name('category');
+    Route::post('categoryStore',[CategoryController::class,'categoryStore'])->name('category.store');
+
+    Route::get('categoryEdit/{id}',[CategoryController::class,'categoryEdit'])->name('category.edit');
+    Route::put('categoryUpdate',[CategoryController::class,'categoryUpdate'])->name('category.update');
+    Route::delete('categoryDelete/{id}',[CategoryController::class,'categoryDelete'])->name('category.delete');
+
+
 });
 
 // ================================================user route============================================
 Route::group(['prefix' => 'user', 'middleware' => ['user','auth'], 'namespace' => 'User'],function(){
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
+
     //user profile
     Route::post('updateProfile',[UserController::class,'updateProfile'])->name('update.profile');
     Route::get('imageForm', [UserController::class, 'imageForm'])->name('image.form');

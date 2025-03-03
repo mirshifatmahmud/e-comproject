@@ -256,8 +256,11 @@
     <!-- ########## START: MAIN PANEL ########## -->
     @yield('content')
     <!-- ########## END: MAIN PANEL ########## -->
+
+    <!--all script files-->
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="{{ asset('backend') }}/lib/jquery/jquery-3.6.js"></script>
+
     <script src="{{ asset('backend') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
@@ -289,7 +292,8 @@
         //   $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
 
         });
-      </script>
+    </script>
+
     <script src="{{ asset('backend') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="{{ asset('backend') }}/lib/d3/d3.js"></script>
     <script src="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.js"></script>
@@ -304,7 +308,6 @@
     <script src="{{ asset('backend') }}/js/dashboard.js"></script>
 
     <script src="{{ asset('backend/lib/toastr/toastr.min.js') }}"></script>
-
     <script>
         toastr.options = {
             "closeButton": true,
@@ -319,7 +322,6 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-
         @if (session('success'))
             toastr.success("{{ session('success') }}");
         @endif
@@ -337,16 +339,21 @@
         @endif
     </script>
 
+    {{-- sweetalert --}}
     <!-- jQuery -->
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <!-- SweetAlert2 -->
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-    <script src="{{ asset('backend/lib/sweetalert/sweetalert.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/lib/sweetalert/sweetalert.min.js') }}"></script> --}}
+    <script src="{{ asset('backend/lib/sweetalert/sweetalert2v11.min.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script>
-        $(document).ready(function() {
-            $('#delete-form').on('submit', function(e) {
-                e.preventDefault(); // ফর্ম সাবমিশন বন্ধ করুন
 
+        $(document).ready(function() {
+            // id or class use delete-form
+            $(document).on('submit', '#delete-form', function(e) {
+                e.preventDefault();
+                var form = this;
                 Swal.fire({
                     title: "Are you sure To Delete?",
                     text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -357,12 +364,12 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // যদি ব্যবহারকারী কনফার্ম করে, তাহলে ফর্ম সাবমিট করুন
-                        e.currentTarget.submit();
+                        form.submit();
                     }
                 });
             });
         });
+
     </script>
 
   </body>
