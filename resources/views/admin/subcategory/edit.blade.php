@@ -24,7 +24,7 @@
                         <form action="{{route('subCategory.update')}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" value="{{$subcategories->id}}" name="id">
+                            <input type="hidden  " value="{{$subcategories->id}}" name="id">
                             <div class="form-group">
                                 <label class="form-control-label">Select Category English: <span class="tx-danger">*</span></label>
                                 <select class="form-control select2-show-search" data-placeholder="Choose one" name="category_id">

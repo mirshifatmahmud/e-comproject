@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
+use App\Http\Controllers\Admin\Category\SubSubCategoryController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin','auth'], 'namespace'
     Route::get('subCategoryEdit/{id}',[SubCategoryController::class,'subCategoryEdit'])->name('subCategory.edit');
     Route::put('subCategoryUpdate',[SubCategoryController::class,'subCategoryUpdate'])->name('subCategory.update');
     Route::delete('subCategoryDelete/{id}',[SubCategoryController::class,'subCategoryDelete'])->name('subCategory.delete');
+
+    //sub subcategory crud
+    Route::get('sub-subCategories',[SubSubCategoryController::class,'index'])->name('sub.subCategory');
+    Route::get('subCategory/ajax/{cat_id}',[SubSubCategoryController::class,'getSubCat']);
+    Route::post('sub-subCategoryStore',[SubSubCategoryController::class,'subSubCategoryStore'])->name('sub.subCategory.store');
+
+    Route::get('sub-subCategoryEdit/{id}',[SubSubCategoryController::class,'subSubCategoryEdit'])->name('sub.subCategory.edit');
+    Route::put('sub-subCategoryUpdate',[SubSubCategoryController::class,'subSubCategoryUpdate'])->name('sub.subCategory.update');
+    Route::delete('sub-subCategoryDelete/{id}',[SubSubCategoryController::class,'subSubCategoryDelete'])->name('sub.subCategory.delete');
 
 
 });

@@ -42,6 +42,7 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{route('category')}}" class="nav-link @yield('all-category-active')">All Category</a></li>
           <li class="nav-item"><a href="{{route('subCategory')}}" class="nav-link @yield('all-sub-category-active')">All Subcategory</a></li>
+          <li class="nav-item"><a href="{{route('sub.subCategory')}}" class="nav-link @yield('all-sub-sub-category-active')">All Sub Subcategory</a></li>
         </ul>
 
       </div><!-- sl-sideleft-menu -->
